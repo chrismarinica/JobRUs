@@ -1,7 +1,6 @@
 import express from 'express';
 import path from 'node:path';
-//import type { Request, Response } from 'express'; //for catch all route.
-//import {Request, Response } from 'express'; //for catch all route.
+import type { Request, Response } from 'express'; //for catch all route.
 import './config/connection.js';
 import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
@@ -28,8 +27,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 //added route for graphql and expressMiddleware.
-//app.use('/graphql', expressMiddleware(server as any,{
-app.use('/graphql', expressMiddleware(server,{
+app.use('/graphql', expressMiddleware(server as any,{
 
   //context: authenticationToken as any
   context: authenticationToken
@@ -43,8 +41,7 @@ if (process.env.NODE_ENV === 'production') {
 //app.use(routes);
 
 //catch all routes for get requests.
-//app.get('*', (_req: Request, res: Response) =>{
-app.get('*', (_req, res) =>{
+app.get('*', (_req: Request, res: Response) =>{
   res.sendFile(path.join(__dirname, '../../client/build/index.html'));
 });
 }
