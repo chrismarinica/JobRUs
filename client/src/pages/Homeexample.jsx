@@ -26,7 +26,7 @@ const Homeexample = () => {
             setLoading(false)
         });
     },[])
-    if (loading) return <p>loadingjobs...</p>;
+    if (loading) return <p>loadingjobs...</p>
     if (error) return <p>error:{error}</p>
   return (
     <div>
