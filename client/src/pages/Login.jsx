@@ -11,8 +11,8 @@ const Login = ({ setToken }) => {
   });
   const [isRegistering, setIsRegistering] = useState(false);
 
-  //const [register] = useMutation(REGISTER_USER);
-  //const [login] = useMutation(LOGIN_USER);
+  const [register] = useMutation(REGISTER_USER);
+  const [login] = useMutation(LOGIN_USER);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
