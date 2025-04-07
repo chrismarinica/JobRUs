@@ -1,8 +1,8 @@
 //todo define query and mutation function to work with Mongoose models.
 
 import { Query } from 'mongoose';
-import {User} from '../models/index.js';
-import {siginToken, AuthenticationError } from '../services/auth.js';
+import {User} from '../models/index';
+import {siginToken, AuthenticationError } from '../services/auth';
 
 interface AddUserArgs{
     input: {

@@ -1,8 +1,8 @@
 import { Schema, model, Document } from 'mongoose';
 import bcrypt from 'bcrypt';
 
-import jobSchema from './Jobs.js';
-import type {JobDoc} from './Jobs.js';
+import jobSchema from './Jobs';
+import type {JobDoc} from './Jobs';
 
 export interface UserDoc extends Document {
     username: string;
