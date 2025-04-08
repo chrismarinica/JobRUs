@@ -1,15 +1,15 @@
 import { Schema, model, Document } from 'mongoose';
 import bcrypt from 'bcrypt';
 
-import jobSchema from './Jobs';
-import type {JobDoc} from './Jobs';
+import JobSchema from './Jobs.js';
+import type {JobDoc} from './Jobs.js';
 
 export interface UserDoc extends Document {
     username: string;
     email: string;
     password: string;
     savedJobs: JobDoc[];
-    isCorrectPassword(pasword: string): Promise<boolean>;
+    isCorrectPassword(password: string): Promise<boolean>;
     JobCount: number;
 }
 
@@ -34,7 +34,7 @@ const userSchema = new Schema<UserDoc>(
             minlength: 8,
          },
 
-         savedJobs: [jobSchema],
+         savedJobs: [JobSchema],
 
     },
     {
