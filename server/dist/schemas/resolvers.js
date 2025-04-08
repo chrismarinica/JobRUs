@@ -5,7 +5,7 @@ const resolvers = {
     Query: {
         me: async (_parent, _args, context) => {
             if (context.user) {
-                const newUser = await User.findOne({ _id: context.user._id }); //.populate("jobs");
+                const newUser = await User.findOne({ _id: context.user._id }).populate("savedJobs");
                 return newUser;
             }
             throw new AuthenticationError('Unable to authenticate user.');
