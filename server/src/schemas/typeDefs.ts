@@ -16,7 +16,7 @@ const typeDefs = gql`
 
   type Query {
     me: User
-    getSavedJobs: [Job]
+    
   }
 
   type User {
