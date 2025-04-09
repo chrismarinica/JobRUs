@@ -1,6 +1,5 @@
 //todo define query and mutation function to work with Mongoose models.
 
-import { Query } from 'mongoose';
 import {User} from '../models/index.js';
 import {siginToken, AuthenticationError } from '../services/auth.js';
 
@@ -33,7 +32,8 @@ const resolvers = {
         me: async(_parent: any, _args: any, context: any) =>{
 
             if(context.user){
-                return User.findOne({_id: context.user.id}).populate("jobs");
+                const newUser = await User.findOne({_id: context.user._id}).populate("savedJobs");
+                return newUser;
             }
             throw new AuthenticationError('Unable to authenticate user.');
         }

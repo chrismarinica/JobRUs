@@ -19,11 +19,11 @@ const Home = () => {
   //const [saveJob] = useMutation(SAVE_JOB);
 
   // Login Check
-useEffect (() => {
-  if (!IS_LOGGED_IN){
-    navigate('/login')
-  }
-});
+// useEffect (() => {
+//   if (!IS_LOGGED_IN){
+//     navigate('/login')
+//   }
+// });
   // API request with axios
   useEffect(() => {
     const fetchJobs = async () => {

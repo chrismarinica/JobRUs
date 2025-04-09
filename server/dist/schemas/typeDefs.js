@@ -1,6 +1,5 @@
 import { gql } from 'graphql-tag';
-
-const typeDefs = gql`
+const typeDefs = gql `
   input UserInput {
     username: String!
     email: String!
@@ -46,7 +45,4 @@ const typeDefs = gql`
     deleteJob(jobId: String!): User
   }
 `;
-
 export default typeDefs;
-
-
