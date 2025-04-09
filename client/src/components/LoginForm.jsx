@@ -23,22 +23,22 @@ const LoginForm = () => {
   const toggleMode = () => {
     setIsSignup((prev) => !prev);
   };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const { email, password, username } = formState;
-      const data = isSignup
-        ? await signupUser({ email, password, username })
-        : await loginUser({ email, password });
-
-      saveToken(data.token); // Save JWT
-      navigate('/home'); // Redirect after login
-    } catch (error) {
-      console.error('Auth error:', error);
-      alert('Failed to log in or create account.');
-    }
-  };
+// Looking for the Login.jsx
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     try {
+//       const { email, password, username } = formState;
+//       const {data}= isSignup
+//         ? await signupUser({ email, password, username })
+//         : await loginUser({ email, password });
+// console.log(data)
+//       saveToken(data.addUser.token); // Save JWT
+//       navigate('/home'); // Redirect after login
+//     } catch (error) {
+//       console.error('Auth error:', error);
+//       alert('Failed to log in or create account.');
+//     }
+//   };
 
   return (
     <div className="login-form-container">

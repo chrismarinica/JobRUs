@@ -28,10 +28,16 @@ const Login = ({ setToken }) => {
     try {
       const { username, email, password } = formState;
       const { data } = isRegistering
-        ? await register({ variables: { username, email, password } })
+        ? await register({ variables: {
+          input: {
+            email: email,
+            password: password,
+            username: username
+          }
+        } })
         : await login({ variables: { email, password } });
 
-      const token = isRegistering ? data.register.token : data.login.token;
+      const token = isRegistering ? data.addUser.token : data.login.token;
       localStorage.setItem('token', token);
       setToken(token);
       navigate('/home');
