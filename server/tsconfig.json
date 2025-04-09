@@ -1,18 +1,18 @@
 {
-  "compilerOptions": {
-    "module": "ESNext", 
-    "target": "ESNext", 
-    "moduleResolution": "node", 
-    "esModuleInterop": true, 
-    "allowSyntheticDefaultImports": true,
-    "outDir": "./dist", 
-    "rootDir": "./src",
-    "strict": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
-  },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules"]
-}
-
-
+    "compilerOptions": {
+      "target": "ES6",                  // This is good
+      "module": "ESNext",               // This should be fine for ES modules
+      "outDir": "dist",                 // Output folder is good
+      "rootDir": "src",                 // Your source folder
+      "strict": true,                   // Optional: Best practice for TypeScript
+      "esModuleInterop": true,          // Good for compatibility with CommonJS packages
+      "skipLibCheck": true,             // Optional: Improves build time
+      "forceConsistentCasingInFileNames": true,
+      "moduleResolution": "node",
+      // "resolveJsonModule": true         // Optional: Allows importing JSON
+    },
+    "include": ["src"],                 // Include the source files
+    "exclude": ["node_modules", "dist"] // Exclude these from compilation
+  }
+  
+  
