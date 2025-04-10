@@ -3,7 +3,7 @@ import { loginUser, signupUser } from '../utils/auth';
 import { saveToken } from '../utils/token';
 import { useNavigate } from 'react-router-dom';
 
-const LoginForm = () => {
+const LoginForm = ({ setToken }) => {
   const [isSignup, setIsSignup] = useState(false);
   const [formState, setFormState] = useState({
     username: '',
@@ -23,22 +23,24 @@ const LoginForm = () => {
   const toggleMode = () => {
     setIsSignup((prev) => !prev);
   };
-// Looking for the Login.jsx
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     try {
-//       const { email, password, username } = formState;
-//       const {data}= isSignup
-//         ? await signupUser({ email, password, username })
-//         : await loginUser({ email, password });
-// console.log(data)
-//       saveToken(data.addUser.token); // Save JWT
-//       navigate('/home'); // Redirect after login
-//     } catch (error) {
-//       console.error('Auth error:', error);
-//       alert('Failed to log in or create account.');
-//     }
-//   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const { email, password, username } = formState;
+      const { data } = isSignup
+        ? await signupUser({ email, password, username })
+        : await loginUser({ email, password });
+
+      saveToken(data.addUser.token); // Save JWT
+      setToken(data.addUser.token); // Pass token to the parent component
+      navigate('/home'); // Redirect after login
+    } catch (error) {
+      console.error('Auth error:', error);
+      alert('Failed to log in or create account.');
+    }
+  };
 
   return (
     <div className="login-form-container">
@@ -83,3 +85,4 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
+

@@ -19,7 +19,7 @@ export const loginUser = async ({ email, password }) => {
           }
         }
       `,
-      variables: { email, password },
+      variables: { email, password }, // Send email and password correctly
     }),
   });
 
@@ -40,18 +40,19 @@ export const signupUser = async ({ username, email, password }) => {
     },
     body: JSON.stringify({
       query: `
-        mutation Signup($username: String!, $email: String!, $password: String!) {
-          addUser(username: $username, email: $email, password: $password) {
+        mutation Signup($input: UserInput!) {
+          addUser(input: $input) {
             token
             user {
-              _id
-              username
               email
+              username
             }
           }
         }
       `,
-      variables: { username, email, password },
+      variables: {
+        input: { username, email, password }, // Wrap the values in a single input object
+      },
     }),
   });
 

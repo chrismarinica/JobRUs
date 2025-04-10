@@ -1,0 +1,34 @@
+/* Header Styles */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: #1e1e2f;
+  }
+  
+  img.logo {
+    width: unset;
+    height: 5rem;
+  }
+  
+  header h1 {
+    margin: auto;
+    color: #4f46e5;
+    font-size: 2rem;
+  }
+
+  /* User Info and Menu */
+  .username {
+    color: #fff;
+    font-size: 1rem;
+  }
+  
+  nav {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .menu-item {
+    color: #fff;
+  }

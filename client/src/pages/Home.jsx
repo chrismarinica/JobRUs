@@ -1,29 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useMutation } from '@apollo/client';
 import axios from 'axios';
-import { SAVE_JOB } from '../utils/mutations'; // Import your SAVE_JOB mutation
-import { useNavigate } from 'react-router-dom';
-//import JobCard from '../components/JobCard'; // Import JobCard component
-
+import Header from '../components/Header/Header';
 
 const Home = () => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [search, setSearch] = useState('');
-  const navigate = useNavigate();
 
-  const IS_LOGGED_IN = false;
-  
-  // The mutation hook for saving jobs
-  //const [saveJob] = useMutation(SAVE_JOB);
-
-  // Login Check
-// useEffect (() => {
-//   if (!IS_LOGGED_IN){
-//     navigate('/login')
-//   }
-// });
   // API request with axios
   useEffect(() => {
     const fetchJobs = async () => {
@@ -48,19 +32,7 @@ const Home = () => {
     };
 
     fetchJobs();
-  }, [search]); // Re-run API call if search query changes
-
-  // Handling save job functionality with GraphQL mutation
-  const handleSaveJob = async (job) => {
-    try {
-      // Save the job using the GraphQL mutation <- Uncomment mutation stuff, 
-      // await saveJob({ variables: { jobId: job.job_id, title: job.job_title, employer: job.employer_name } });
-      alert('Job saved successfully!');
-    } catch (error) {
-      console.error('Error saving job:', error);
-      alert('Failed to save job!');
-    }
-  };
+  }, [search]);
 
   // Loading state
   if (loading) return <p>Loading jobs...</p>;
@@ -75,8 +47,8 @@ const Home = () => {
   );
 
   return (
-    <div>
-      <h1>Job Search</h1>
+    <div className="home-container">
+      <Header/>
 
       {/* Search Input and Search Button */}
       <div className="search-container">
@@ -85,20 +57,20 @@ const Home = () => {
           placeholder="Search for jobs..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
+          className="search-input"
         />
-        {/* Search Button */}
-        <button onClick={() => setSearch(search)}>Search</button>
+        <button onClick={() => setSearch(search)} className="search-button">
+          Search
+        </button>
       </div>
 
       {/* Display filtered jobs */}
-      <div className = "filtered-jobs-container">
+      <div className="filtered-jobs-container">
         {filteredJobs.map((job) => (
-          <div key={job.job_id}>
+          <div key={job.job_id} className="job-card">
             <h3>{job.job_title}</h3>
             <p>{job.employer_name} - {job.job_city}, {job.job_country}</p>
-            
-            {/* Save Job Button */}
-            <button onClick={() => handleSaveJob(job)}>
+            <button className="save-job-button">
               Save Job
             </button>
           </div>
@@ -109,6 +81,7 @@ const Home = () => {
 };
 
 export default Home;
+
 
 
 
