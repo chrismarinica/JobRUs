@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
-import { GET_SAVED_JOBS } from '../graphql/queries'; // Query for fetching saved jobs
-import { REMOVE_JOB } from '../graphql/mutations'; // Mutation for removing jobs
+import { GET_SAVED_JOBS } from '../utils/queries'; // Query for fetching saved jobs
+import { REMOVE_JOB } from '../utils/mutations'; // Mutation for removing jobs
 import JobCard from '../components/JobCard';
 
 const SavedJobs = () => {
@@ -11,8 +11,8 @@ const SavedJobs = () => {
 
   // useEffect to update savedJobs when data is fetched
   useEffect(() => {
-    if (data && data.savedJobs) {
-      setSavedJobs(data.savedJobs);
+    if (data && data.saveJobs) {
+      setSavedJobs(data.saveJobs);
     }
   }, [data]); // Dependency on data to re-run whenever it changes
 
