@@ -33,8 +33,8 @@ const LoginForm = ({ setToken }) => {
         ? await signupUser({ email, password, username })
         : await loginUser({ email, password });
 
-      saveToken(data.addUser.token); // Save JWT
-      setToken(data.addUser.token); // Pass token to the parent component
+      saveToken(data?.addUser?.token); // Save JWT
+      setToken(data?.addUser?.token); // Pass token to the parent component
       navigate('/home'); // Redirect after login
     } catch (error) {
       console.error('Auth error:', error);

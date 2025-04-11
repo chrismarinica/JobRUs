@@ -1,3 +1,12 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 import { Schema, model } from 'mongoose';
 import bcrypt from 'bcrypt';
 import JobSchema from './Jobs.js';
@@ -25,15 +34,19 @@ const userSchema = new Schema({
         virtuals: true,
     },
 });
-userSchema.pre('save', async function (next) {
-    if (this.isNew || this.isModified('password')) {
-        const saltRounds = 10;
-        this.password = await bcrypt.hash(this.password, saltRounds);
-    }
-    next();
+userSchema.pre('save', function (next) {
+    return __awaiter(this, void 0, void 0, function* () {
+        if (this.isNew || this.isModified('password')) {
+            const saltRounds = 10;
+            this.password = yield bcrypt.hash(this.password, saltRounds);
+        }
+        next();
+    });
 });
-userSchema.methods.isCorrectPassword = async function (password) {
-    return bcrypt.compare(password, this.password);
+userSchema.methods.isCorrectPassword = function (password) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return bcrypt.compare(password, this.password);
+    });
 };
 userSchema.virtual('JobCount').get(function () {
     return this.savedJobs.length;

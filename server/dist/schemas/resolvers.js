@@ -14,7 +14,8 @@ const resolvers = {
     Query: {
         me: (_parent, _args, context) => __awaiter(void 0, void 0, void 0, function* () {
             if (context.user) {
-                return User.findOne({ _id: context.user.id }).populate("jobs");
+                const newUser = yield User.findOne({ _id: context.user._id }).populate("savedJobs");
+                return newUser;
             }
             throw new AuthenticationError('Unable to authenticate user.');
         })

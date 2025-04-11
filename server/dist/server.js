@@ -1,3 +1,12 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 import express from 'express';
 import path from 'node:path';
 import { ApolloServer } from '@apollo/server';
@@ -9,11 +18,11 @@ const server = new ApolloServer({
     typeDefs,
     resolvers,
 });
-const startApolloServer = async () => {
+const startApolloServer = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        await db(); // Connect to MongoDB
+        yield db(); // Connect to MongoDB
         console.log("Connected to the database.");
-        await server.start(); // Start Apollo Server
+        yield server.start(); // Start Apollo Server
         const app = express();
         const PORT = process.env.PORT || 3001;
         app.use(express.urlencoded({ extended: false }));
@@ -37,5 +46,5 @@ const startApolloServer = async () => {
         console.error("Error starting server:", error);
         process.exit(1); // Exit if there's an error
     }
-};
+});
 startApolloServer();
