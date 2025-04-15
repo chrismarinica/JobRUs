@@ -25,22 +25,30 @@ const LoginForm = ({ setToken }) => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
-      const { email, password, username } = formState;
-      const { data } = isSignup
-        ? await signupUser({ email, password, username })
-        : await loginUser({ email, password });
+  try {
+    const { email, password, username } = formState;
 
-      saveToken(data?.addUser?.token); // Save JWT
-      setToken(data?.addUser?.token); // Pass token to the parent component
-      navigate('/home'); // Redirect after login
-    } catch (error) {
-      console.error('Auth error:', error);
-      alert('Failed to log in or create account.');
+    const { data } = isSignup
+      ? await signupUser({ email, password, username })
+      : await loginUser({ email, password });
+
+    const token = isSignup ? data?.addUser?.token : data?.login?.token;
+
+    if (!token) {
+      throw new Error('No token returned from server.');
     }
-  };
+
+    saveToken(token);
+    setToken(token);
+    navigate('/home');
+  } catch (error) {
+    console.error('Auth error:', error);
+    alert('Failed to log in or create account.');
+  }
+};
+
 
   return (
     <div className="login-form-container">

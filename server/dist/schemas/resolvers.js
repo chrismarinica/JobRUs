@@ -44,7 +44,7 @@ const resolvers = {
         saveJob: (_parent, args, context) => __awaiter(void 0, void 0, void 0, function* () {
             try {
                 if (context.user) {
-                    const updatedUser = yield User.findOneAndUpdate({ _id: context.user_id }, { $addToSet: { saveJobs: Object.assign({}, args) } }, { new: true, runValidators: true });
+                    const updatedUser = yield User.findOneAndUpdate({ _id: context.user._id }, { $addToSet: { saveJobs: Object.assign({}, args) } }, { new: true, runValidators: true });
                     return updatedUser;
                 }
                 throw new Error("Invalid credentials!");

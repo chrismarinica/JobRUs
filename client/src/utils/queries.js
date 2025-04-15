@@ -5,7 +5,7 @@ import { gql } from '@apollo/client';
 export const GET_SAVED_JOBS = gql`
 query Me {
   me {
-    saveJobs {
+    savedJobs {
       company
       jobId
       location

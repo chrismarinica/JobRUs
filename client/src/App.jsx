@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import SavedJobs from './pages/SavedJobs.jsx';
+import SavedJobs from './pages/savedJobs.jsx';
 import Home from './pages/Home.jsx';
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import Login from './pages/Login.jsx';
 import { setContext } from '@apollo/client/link/context';
+import { saveToken, getToken, removeToken } from './utils/token.js';
 
 const httpLink = createHttpLink({
   uri: '/graphql', // Your back-end GraphQL API URL
@@ -31,14 +32,15 @@ const client = new ApolloClient({
 
 const App = () => {
   const [token, setToken] = useState(localStorage.getItem('token')); // Store token in state
-  const [savedJobs, setSavedJobs] = useState([]); // State to manage saved jobs
+  //const [SavedJobs, setSavedJobs] = useState([]); // State to manage saved jobs
 
   return (
     <ApolloProvider client={client}>
       <Router>
         <Routes>
-          <Route path="/home" element={<Home />} /> 
+          <Route path="/home" element={<Home />} />  
           <Route path="/login" element={<Login setToken={setToken} />} /> {/* Pass setToken to Login */}
+          <Route path="/" element={<Login setToken={setToken} />} /> {/* Pass setToken to Login */}
           <Route path="/saved-jobs" element={<SavedJobs />} /> {/* Saved Jobs route */}
         </Routes>
 
