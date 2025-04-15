@@ -1,19 +1,34 @@
-// src/components/Header.jsx
-import React, { useState } from 'react';
-import "./Header.css"
-import logo from '../../assets/logo.png'; // Assuming you have a logo image in assets
+import React, { useState, useEffect } from 'react';
+import './Header.css';
+import logo from '../../assets/logo.png';
 import { Link } from 'react-router-dom';
-import { jwtDecode } from 'jwt-decode'
+import { jwtDecode } from 'jwt-decode';
 
 const Header = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true); // Simulate login state
-  const [username, setUsername] = useState('JohnDoe'); // Example username
-  console.log(localStorage.getItem('id_token'))
+  const [username, setUsername] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('id_token');
+    console.log('Token:', token);
+
+    if (token) {
+      try {
+        const decoded = jwtDecode(token);
+        setUsername(decoded?.data?.username || 'User');
+        setIsLoggedIn(true);
+      } catch (err) {
+        console.error('Invalid token:', err);
+        setIsLoggedIn(false);
+      }
+    }
+  }, []);
+
   return (
     <header>
       <img src={logo} alt="Logo" className="logo" />
       <h1>Job Search</h1>
-      {isLoggedIn ? (
+      {isLoggedIn && (
         <div>
           <p className="username">Welcome, {username}</p>
           <nav>
@@ -21,9 +36,10 @@ const Header = () => {
             <Link to="/saved-jobs" className="menu-item">Saved Jobs</Link>
           </nav>
         </div>
-      ) : ''}
+      )}
     </header>
   );
 };
 
 export default Header;
+
