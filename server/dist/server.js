@@ -14,6 +14,9 @@ import { expressMiddleware } from '@apollo/server/express4';
 import { typeDefs, resolvers } from './schemas/index.js'; // ES Module Import
 import { authenticationToken } from './services/auth.js'; // ES Module Import
 import db from './config/connection.js'; // Import the database connection
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+const __dirname = dirname(fileURLToPath(import.meta.url));
 const server = new ApolloServer({
     typeDefs,
     resolvers,
